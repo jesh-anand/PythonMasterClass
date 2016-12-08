@@ -2,6 +2,9 @@
 Scripts learnt from Udemy Python Masterclass course
 
 ###  Scripts
+> _**Section 4 - Functions**_
+>> * passing_functions_as_arguments.py
+
 > _**Section 5 - Exception Handling**_
 >> * exception_exercise1.py
 
