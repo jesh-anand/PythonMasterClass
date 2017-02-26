@@ -31,7 +31,8 @@ class Post(object):
 
     @classmethod
     def from_mongo_db_into_post_object(cls, id):
-        post_data = Database.find_one(collection='posts', query={'id': id})
+        collection_name = 'posts'
+        post_data = Database.find_one(collection=collection_name, query={'id': id})
         return cls(
             blog_id=post_data['blog_id'],
             title=post_data['title'],
@@ -42,4 +43,5 @@ class Post(object):
 
     @staticmethod
     def from_blog(id):
-        return [post for post in Database.find(collection='blog', query={'id': id})]
+        collection_name = 'blog'
+        return [post for post in Database.find(collection=collection_name, query={'id': id})]
