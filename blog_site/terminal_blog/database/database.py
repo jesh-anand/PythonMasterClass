@@ -4,7 +4,7 @@ __author__ = 'Prajesh Ananthan'
 
 
 class Database(object):
-    URI = "mongodb://127.9.0.1:27017"
+    URI = "mongodb://127.0.0.1:27017"
     DATABASE = None
 
     @staticmethod
@@ -18,9 +18,11 @@ class Database(object):
         Database.DATABASE[collection].insert(data)
 
     @staticmethod
-    def find(collection, data):
-        Database.DATABASE[collection].find(data)
+    def find(collection, query):
+        result = Database.DATABASE[collection].find(query)
+        return result
 
     @staticmethod
-    def find_one(collection, data):
-        Database.DATABASE[collection].find_one(data)
+    def find_one(collection, query):
+        result = Database.DATABASE[collection].find_one(query)
+        return result
