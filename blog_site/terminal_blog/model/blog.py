@@ -1,7 +1,7 @@
 import datetime
 import uuid
 
-from blog_site.terminal_blog.database.database import Database
+from blog_site.common.database import Database
 from blog_site.terminal_blog.model.post import Post
 
 

@@ -1,4 +1,4 @@
-from blog_site.terminal_blog.database.database import Database
+from blog_site.common.database import Database
 from blog_site.terminal_blog.model.blog import Blog
 
 __author__ = 'Prajesh Ananthan'
