@@ -8,8 +8,9 @@ from blog_site.webapp.models.post import Post
 class Blog(object):
     COLLECTION_NAME = 'blog'
 
-    def __init__(self, author, title, description, _id=None):
+    def __init__(self, author, title, description, author_id, _id=None):
         self.author = author
+        self.author_id = author_id
         self.title = title
         self.description = description
         self._id = uuid.uuid4().hex if _id is None else _id
@@ -40,10 +41,17 @@ class Blog(object):
             'id': self._id,
             'title': self.title,
             'description': self.description,
-            'author': self.author
+            'author': self.author,
+            'author_id': self.author_id
         }
 
     @classmethod
     def from_mongo_in_blog_object(cls, _id):
         blog_data = Database.find_one(collection=Blog.COLLECTION_NAME, query={'id': _id})
         return cls(**blog_data)
+
+    @classmethod
+    def find_author_by_id(cls, author_id):
+        # will return content from Database not blog objects
+        blogs = Database.find(Blog.COLLECTION_NAME, query={'author_id': author_id})
+        return [cls(**blog) for blog in blogs]

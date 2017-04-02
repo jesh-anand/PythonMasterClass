@@ -1,8 +1,10 @@
+import datetime
 import uuid
 
 from flask import session
 
 from blog_site.common.database import Database
+from blog_site.webapp.models.blog import Blog
 
 
 class User(object):
@@ -43,7 +45,21 @@ class User(object):
         else:
             # TODO: notify user account exists!
             return False
-        pass
+
+    def new_blog(self, title, description):
+        blog = Blog(
+            author=self.email,
+            title=title,
+            description=description,
+            author_id=self._id
+        )
+        blog.save_to_mongo()
+
+    @staticmethod
+    def new_post(blog_id, title, content, date=datetime.datetime.utcnow()):
+        # title, content, created_date=datetime.datetime.utcnow()
+        blog = Blog.from_mongo_in_blog_object(blog_id)
+        blog.new_post(title=title, content=content, created_date=date)
 
     @staticmethod
     def login(user_email):
@@ -54,7 +70,7 @@ class User(object):
         session['email'] = None
 
     def get_blogs(self):
-        pass
+        return Blog.find_author_by_id(self._id)
 
     def get_json(self):
         # TODO: Encrypt password
