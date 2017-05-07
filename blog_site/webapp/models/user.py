@@ -28,7 +28,6 @@ class User(object):
             return cls(**data)
 
     @staticmethod
-    # User.login_valid("prajesh.ananthan@outlook.com", "password")
     def login_valid(email, password):
         user = User.get_by_email(email)
         if user is not None:
@@ -41,6 +40,7 @@ class User(object):
         if user is None:
             new_user = cls(email, password)
             new_user.save_to_mongo()
+            session['email'] = email
             return True
         else:
             # TODO: notify user account exists!
