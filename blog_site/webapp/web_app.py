@@ -48,8 +48,14 @@ def login_user():
 def register_user():
     email = request.form['email']
     password = request.form['password']
+    confirm_password = request.form['confirm-password']
 
-    User.register(email, password)
+    if password == confirm_password:
+        User.register(email, password)
+    else:
+        # mismatch passwords
+        # TODO: Insert validation error
+        return render_template("register.html")
 
     return render_template("register-success.html", email=session['email'])
 
