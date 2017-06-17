@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
+<h3>Registration page</h3>
 <form id="register-form" action="/auth/register" method="post">
-    User name:
+    <label for="email">User name (E-mail): </label>
     <input type="text" id="email" name="email">
-    Password:
+
+    <label for="password">Password: </label>
     <input type="password" id="password" name="password">
 
-    <input type="submit" id="submit-button"/>
+    <button type="submit" id="submit-button">Register</button>
 </form>
 {% endblock %}
