@@ -18,8 +18,10 @@ class Blog(object):
     def new_post(self, title, content, created_date=datetime.datetime.utcnow()):
         self.created_date = str(created_date)
         post = Post(
-            blog_id=self._id, title=title,
-            content=content, author=self.author,
+            blog_id=self._id,
+            title=title,
+            content=content,
+            author=self.author,
             created_date=self.created_date
         )
         post.save_to_mongo()
@@ -47,7 +49,7 @@ class Blog(object):
 
     @classmethod
     def from_mongo_in_blog_object(cls, _id):
-        blog_data = Database.find_one(collection=Blog.COLLECTION_NAME, query={'id': _id})
+        blog_data = Database.find_one(collection=Blog.COLLECTION_NAME, query={'_id': _id})
         return cls(**blog_data)
 
     @classmethod

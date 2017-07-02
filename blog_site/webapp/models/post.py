@@ -1,3 +1,4 @@
+import datetime
 import uuid
 
 from blog_site.common.database import Database
@@ -8,7 +9,7 @@ __author__ = 'Prajesh Ananthan'
 class Post(object):
     COLLECTION_NAME = 'posts'
 
-    def __init__(self, blog_id, title, content, author, created_date, _id=None):
+    def __init__(self, blog_id, title, content, author, created_date=datetime.datetime.utcnow(), _id=None):
         self.blog_id = blog_id
         self.title = title
         self.content = content
